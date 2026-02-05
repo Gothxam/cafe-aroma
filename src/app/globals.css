@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root{
+  /* --coffee-bean: hsla(24, 38%, 36%, 1);
+--camel: hsla(35, 27%, 52%, 1);
+--almond-cream: hsla(29, 41%, 88%, 1);
+--dusty-olive: hsla(74, 19%, 36%, 1);
+--ebony: hsla(80, 17%, 24%, 1); */
+
+--coffee-bean: #7f5539ff;
+--camel: #a68a64ff;
+--almond-cream: #ede0d4ff;
+--dusty-olive: #656d4aff;
+--ebony: #414833ff;
+--clay-soil: #743d2bff;
+--apricot-cream: #ffdbacff;
+--cinnamon-wood: #b06c49ff;
+
+--dark-walnut: #582f0eff;
+--saddle-brown: #7f4f24ff;
+--toffee-brown: #936639ff;
+--camel: #a68a64ff;
+--khaki-beige: #b6ad90ff;
+--dry-sage: #c2c5aaff;
+--dry-sage-2: #a4ac86ff;
+--dusty-olive: #656d4aff;
+--ebony: #414833ff;
+--charcoal-brown: #333d29ff;
+}
+
+
+@layer base {
+  :root {
+    --background:24 38% 36%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+/* @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+} */
+
+/* =========================
+   BRAND COLOR UTILITIES
+   ========================= */
+@layer utilities {
+  /* -------- coffee_bean -------- */
+  .coffee-100 { background-color: #19110b; }
+  .coffee-200 { background-color: #332217; }
+  .coffee-300 { background-color: #4c3322; }
+  .coffee-400 { background-color: #65442e; }
+  .coffee-500 { background-color: #7f5539; }
+  .coffee-600 { background-color: #ac734d; }
+  .coffee-700 { background-color: #c29678; }
+  .coffee-800 { background-color: #d7b9a5; }
+  .coffee-900 { background-color: #ebdcd2; }
+
+  .text-coffee-100 { color: #19110b; }
+  .text-coffee-200 { color: #332217; }
+  .text-coffee-300 { color: #4c3322; }
+  .text-coffee-400 { color: #65442e; }
+  .text-coffee-500 { color: #7f5539; }
+  .text-coffee-600 { color: #ac734d; }
+  .text-coffee-700 { color: #c29678; }
+  .text-coffee-800 { color: #d7b9a5; }
+  .text-coffee-900 { color: #ebdcd2; }
+
+  /* -------- camel -------- */
+  .camel-100 { background-color: #221c13; }
+  .camel-200 { background-color: #433727; }
+  .camel-300 { background-color: #65533a; }
+  .camel-400 { background-color: #876f4d; }
+  .camel-500 { background-color: #a68a64; }
+  .camel-600 { background-color: #b8a183; }
+  .camel-700 { background-color: #c9b9a2; }
+  .camel-800 { background-color: #dbd0c1; }
+  .camel-900 { background-color: #ede8e0; }
+
+  .text-camel-100 { color: #221c13; }
+  .text-camel-200 { color: #433727; }
+  .text-camel-300 { color: #65533a; }
+  .text-camel-400 { color: #876f4d; }
+  .text-camel-500 { color: #a68a64; }
+  .text-camel-600 { color: #b8a183; }
+  .text-camel-700 { color: #c9b9a2; }
+  .text-camel-800 { color: #dbd0c1; }
+  .text-camel-900 { color: #ede8e0; }
+
+  /* -------- almond_cream -------- */
+  .almond-100 { background-color: #3f2c1a; }
+  .almond-200 { background-color: #7f5935; }
+  .almond-300 { background-color: #b88555; }
+  .almond-400 { background-color: #d2b295; }
+  .almond-500 { background-color: #ede0d4; }
+  .almond-600 { background-color: #f1e6dc; }
+  .almond-700 { background-color: #f4ece5; }
+  .almond-800 { background-color: #f8f3ee; }
+  .almond-900 { background-color: #fbf9f6; }
+
+  .text-almond-100 { color: #3f2c1a; }
+  .text-almond-200 { color: #7f5935; }
+  .text-almond-300 { color: #b88555; }
+  .text-almond-400 { color: #d2b295; }
+  .text-almond-500 { color: #ede0d4; }
+  .text-almond-600 { color: #f1e6dc; }
+  .text-almond-700 { color: #f4ece5; }
+  .text-almond-800 { color: #f8f3ee; }
+  .text-almond-900 { color: #fbf9f6; }
+
+  /* -------- dusty_olive -------- */
+  .olive-500 { background-color: #656d4a; }
+  .text-olive-500 { color: #656d4a; }
+
+  /* -------- ebony -------- */
+  .ebony-500 { background-color: #414833; }
+  .text-ebony-500 { color: #414833; }
+}
