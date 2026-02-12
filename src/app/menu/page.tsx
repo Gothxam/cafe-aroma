@@ -25,15 +25,15 @@ export default function MenuPage() {
         {/* Glass container */}
         <div className="mx-auto max-w-6xl rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl p-8">
           <div className="mb-16 text-center">
-  <h1 className="text-5xl lg:text-6xl font-extrabold text-almond-cream tracking-wide">
-    OUR MENU
-  </h1>
+            <h1 className="text-5xl lg:text-6xl font-extrabold text-almond-cream tracking-wide">
+              OUR MENU
+            </h1>
 
-  <p className="mt-4 max-w-2xl mx-auto text-white/70 text-lg">
-    Freshly prepared dishes, crafted with quality ingredients and
-    served with care. Explore our selection and find your favorite.
-  </p>
-</div>
+            <p className="mt-4 max-w-2xl mx-auto text-white/70 text-lg">
+              Freshly prepared dishes, crafted with quality ingredients and
+              served with care. Explore our selection and find your favorite.
+            </p>
+          </div>
 
           {/* FILTER BUTTONS */}
           <div className="flex flex-wrap gap-3 mb-12">
@@ -55,46 +55,46 @@ export default function MenuPage() {
 
           {/* MENU CONTENT */}
           <div className="space-y-32">
-  {filteredData.map((category) => {
-    const featuredItem = category.items.find(i => i.featured);
+            {filteredData.map((category) => {
+              const featuredItem = category.items.find(i => i.featured);
 
-    return (
-      <div
-        key={category.id}
-        className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
-      >
-        {/* LEFT: Menu */}
-        <MenuSection
-          title={category.title}
-          items={category.items}
-        />
+              return (
+                <div
+                  key={category.id}
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+                >
+                  {/* LEFT: Menu */}
+                  <MenuSection
+                    title={category.title}
+                    items={category.items}
+                  />
 
-        {/* RIGHT: Featured image */}
-        {featuredItem?.image && (
-          <div className="flex justify-center">
-            <div className="relative">
-              <img
-                src={featuredItem.image}
-                alt={featuredItem.name}
-                className="w-80 h-80 object-cover rounded-3xl shadow-2xl"
-              />
+                  {/* RIGHT: Featured image */}
+                  {featuredItem?.image && (
+                    <div className="flex justify-center">
+                      <div className="relative">
+                        <img
+                          src={featuredItem.image}
+                          alt={featuredItem.name}
+                          className="w-80 h-80 object-cover rounded-3xl shadow-2xl"
+                        />
 
-              {featuredItem.offerPrice && (
-                <span className="
+                        {featuredItem.offerPrice && (
+                          <span className="
                   absolute bottom-4 right-4
                   rounded-full bg-orange-500
                   px-4 py-1 text-sm font-semibold
                 ">
-                  ${featuredItem.offerPrice.toFixed(2)}
-                </span>
-              )}
-            </div>
+                            ${featuredItem.offerPrice.toFixed(2)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        )}
-      </div>
-    );
-  })}
-</div>
 
         </div>
 

@@ -7,7 +7,7 @@ export default function GalleryPage() {
         backgroundImage: "url('/gallery/gallery-bg.jpg')",
       }}>
 
-        <div className="min-h-screen bg-camel/20 backdrop-blur-[0px]">
+        <div className="min-h-screen bg-dusty-olive/20 backdrop-blur-[0px]">
         <div className="mx-auto max-w-7xl px-4 py-20">
         
         {/* Page Header */}

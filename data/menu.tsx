@@ -69,7 +69,7 @@ export const menuData: MenuCategory[] = [
           "Classic Italian pizza topped with rich tomato sauce, fresh mozzarella cheese, and aromatic herbs, baked until perfectly crisp",
         price: 11.99,
         featured: true,
-        image: "/menu/servings/margherita.jpg",
+        image: "/menu/servings/pizzas/margherita.jpg",
         offerPrice: 7.49,
       },
       {
@@ -78,7 +78,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Stone-baked pizza layered with mozzarella cheese and spicy pepperoni slices, delivering a bold and savory flavor",
         price: 13.99,
-        image: "/menu/servings/pepperoni.jpg",
+        image: "/menu/servings/pizzas/pepperoni.jpg",
         offerPrice: 7.49,
       },
       {
@@ -88,7 +88,7 @@ export const menuData: MenuCategory[] = [
           "Smoky BBQ sauce base topped with tender grilled chicken, onions, and melted cheese for a sweet and savory bite",
         price: 14.49,
         offerPrice: 12.99,
-        image: "/menu/servings/bbq-pizza.jpg",
+        image: "/menu/servings/pizzas/bbq-pizza.jpg",
       },
     ],
   },
@@ -103,7 +103,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Strong and bold single shot of finely ground coffee beans, brewed under high pressure for an intense flavor",
         price: 3.49,
-        image: "/menu/servings/espresso.jpg",
+        image: "/menu/servings/coffees/espresso.jpg",
         offerPrice: 7.49,
       },
       {
@@ -113,7 +113,7 @@ export const menuData: MenuCategory[] = [
           "Perfect balance of espresso, steamed milk, and thick milk foam, finished with a smooth and creamy texture",
         price: 4.49,
         featured: true,
-        image: "/menu/servings/cappuccino.jpg",
+        image: "/menu/servings/coffees/cappuccino.jpg",
         offerPrice: 7.49,
       },
       {
@@ -122,7 +122,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Smooth espresso blended with steamed milk and sweet caramel syrup, creating a rich and comforting drink",
         price: 4.99,
-        image: "/menu/servings/caramel-latte.jpg",
+        image: "/menu/servings/coffees/caramel-latte.jpg",
         offerPrice: 7.49,
       },
     ],
@@ -139,7 +139,7 @@ export const menuData: MenuCategory[] = [
           "Rich and fudgy chocolate brownie baked fresh daily, served warm with a soft center and crisp edges",
         price: 5.49,
         featured: true,
-        image: "/menu/servings/brownie.jpg",
+        image: "/menu/servings/desserts/brownie.jpg",
         offerPrice: 7.49,
       },
       {
@@ -148,7 +148,7 @@ export const menuData: MenuCategory[] = [
         description:
           "Creamy New York–style cheesecake with a buttery biscuit base, smooth texture, and lightly sweet flavor",
         price: 6.99,
-        image: "/menu/servings/cheesecake.jpg",
+        image: "/menu/servings/desserts/cheesecake.jpg",
         offerPrice: 7.49,
       },
       {
@@ -158,7 +158,7 @@ export const menuData: MenuCategory[] = [
           "Crispy golden waffle served warm and topped with a scoop of vanilla ice cream and sweet syrup",
         price: 7.49,
         offerPrice: 6.49,
-        image: "/menu/servings/waffle.jpg",
+        image: "/menu/servings/desserts/waffle.jpg",
       },
     ],
   },
