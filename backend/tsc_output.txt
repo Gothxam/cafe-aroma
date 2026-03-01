@@ -1,2 +1,0 @@
-services/cloudinary.ts(3,8): error TS1259: Module '"C:/Users/gauta/OneDrive/Desktop/cafe/cafe-app/backend/node_modules/@types/multer/index"' can only be default-imported using the 'esModuleInterop' flag
-services/cloudinary.ts(4,8): error TS1192: Module '"C:/Users/gauta/OneDrive/Desktop/cafe/cafe-app/backend/node_modules/dotenv/lib/main"' has no default export.

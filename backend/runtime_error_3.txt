@@ -1,7 +1,0 @@
-[dotenv@17.3.1] injecting env (7) from .env -- tip: ΓÜÖ∩╕Å  suppress all logs with { quiet: true }
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ≡ƒöÉ encrypt with Dotenvx: https://dotenvx.com
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ≡ƒöÉ encrypt with Dotenvx: https://dotenvx.com
-[dotenv@17.3.1] injecting env (0) from .env -- tip: ≡ƒ¢á∩╕Å  run anywhere with `dotenvx run -- yourcommand`
-Connecting to MongoDB with URI starting with: mongodb+srv://gautam
-Server running on port 5000
-MongoDB Connected: ac-ifkq3u2-shard-00-00.fhcti0z.mongodb.net
