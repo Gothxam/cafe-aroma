@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Button } from "../../ui/button";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "../../ui/sheet";
-import { Menu, Coffee, MapPin } from "lucide-react";
+import { Menu, Coffee, MapPin, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Magnetic from "../../ui/Magnetic";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -19,38 +22,63 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 mx-auto w-full  border border-white/20 bg-white/70 backdrop-blur-xl shadow-lg">
-      <div className="flex h-16 items-center justify-between px-5">
+    <header className={`fixed top-0 z-50 w-full transition-all duration-500 ${isScrolled
+      ? "bg-[#0a0a0a]/90 backdrop-blur-xl border-b border-white/5 py-3"
+      : "bg-transparent py-6"
+      }`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-coffee-bean to-camel shadow-md">
-            <Coffee className="h-6 w-6 text-almond-cream" />
-          </div>
-          <span className="text-lg font-bold tracking-wide text-coffee-bean">
-            Café Aroma
-          </span>
-        </Link>
+        <Magnetic>
+          <Link href="/" className="group flex items-center gap-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-transform group-hover:scale-110">
+              <Coffee className="h-6 w-6 text-black" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tighter text-[#fdfaf7] leading-none mb-1">
+                CAFÉ AROMA
+              </span>
+              <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#d4af37]">
+                EST. 2010
+              </span>
+            </div>
+          </Link>
+        </Magnetic>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-3">
+        <nav className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="relative rounded-full px-4 py-2 text-sm font-medium text-foreground/80 transition-all hover:bg-coffee-bean/10 hover:text-coffee-bean"
+              className="px-5 py-2 text-[11px] font-black tracking-widest uppercase text-[#fdfaf7]/60 hover:text-[#d4af37] transition-colors relative group"
             >
               {link.name}
+              <span className="absolute bottom-0 left-5 right-5 h-px bg-[#d4af37] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
             </Link>
           ))}
-          <Button
-            size="sm"
-            className="ml-2 bg-gradient-to-r from-coffee-bean to-camel text-almond-cream shadow-md hover:scale-105 transition"
-          >
-            <MapPin className="mr-2 h-4 w-4" />
-            Visit Us
-          </Button>
+          <div className="w-px h-4 bg-white/10 mx-4" />
+          <Magnetic>
+            <Button
+              asChild
+              className="bg-[#d4af37] text-black font-black uppercase tracking-widest text-[10px] h-10 px-8 rounded-full hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all"
+            >
+              <Link href="/contact">
+                Visit the Sanctuary
+              </Link>
+            </Button>
+          </Magnetic>
         </nav>
 
         {/* Mobile Nav */}
@@ -59,40 +87,38 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden rounded-xl hover:bg-coffee-bean/10"
+              className="lg:hidden h-12 w-12 rounded-2xl border border-white/5 bg-white/5 text-[#fdfaf7] hover:bg-white/10"
             >
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" className="w-[85%] bg-white/90 backdrop-blur-xl">
-            
-            {/* Mobile Header */}
-            <div className="flex items-center gap-3 border-b pb-4">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-coffee-bean to-camel">
-                <Coffee className="h-5 w-5 text-almond-cream" />
+          <SheetContent side="right" className="w-full bg-[#0a0a0a] border-white/5 p-10 flex flex-col">
+            <div className="flex items-center gap-4 mb-20">
+              <div className="h-10 w-10 bg-[#d4af37] rounded-xl flex items-center justify-center">
+                <Coffee className="w-5 h-5 text-black" />
               </div>
-              <span className="text-lg font-semibold">Café Aroma</span>
+              <span className="text-2xl font-black tracking-tighter text-[#fdfaf7]">CAFÉ AROMA</span>
             </div>
 
-            {/* Links */}
-            <nav className="mt-6 flex flex-col gap-2">
+            <nav className="flex flex-col gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="rounded-xl px-4 py-3 text-base font-medium transition hover:bg-coffee-bean/10 hover:text-coffee-bean"
+                  className="text-4xl font-black text-[#fdfaf7] hover:text-[#d4af37] transition-colors tracking-tighter"
                 >
                   {link.name}
                 </Link>
               ))}
             </nav>
 
-            {/* CTA */}
-            <Button className="mt-auto w-full bg-gradient-to-r from-coffee-bean to-camel text-almond-cream shadow-lg">
-              <MapPin className="mr-2 h-4 w-4" />
-              Visit Us
-            </Button>
+            <div className="mt-auto pt-10 border-t border-white/5">
+              <p className="text-[10px] font-black tracking-[0.3em] uppercase text-[#fdfaf7]/30 mb-8">Reservations</p>
+              <Button asChild className="w-full bg-[#d4af37] text-black font-black uppercase tracking-widest text-xs h-14 rounded-2xl">
+                <Link href="/contact">Book a Table</Link>
+              </Button>
+            </div>
           </SheetContent>
         </Sheet>
       </div>

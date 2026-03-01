@@ -1,65 +1,103 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
-import EventCard from "../../components/events/EventCard";
+import { Button } from "../ui/button";
+import EventCard from "../events/EventCard";
 import { motion } from "framer-motion";
-import { Calendar } from "lucide-react";
+import { Calendar, ChevronRight, Sparkles } from "lucide-react";
 
-const events = [
+const staticEvents = [
   {
-    title: "Live Acoustic Night",
-    date: "Friday • 7 PM",
+    title: "Midnight Jazz & Mocha",
+    date: "Friday • 9 PM",
     description:
-      "Enjoy live acoustic music with your favorite coffee and snacks.",
+      "A nocturnal escape featuring live acoustic jazz and our signature triple-origin dark roast.",
   },
   {
-    title: "Weekend Brunch Special",
-    date: "Saturday & Sunday",
+    title: "The Art of the Pour",
+    date: "Next Wednesday • 2 PM",
     description:
-      "Special brunch menu available only on weekends.",
+      "A masterclass in latte art and manual brewing. Learn from our head barista the secrets.",
   },
   {
-    title: "Coffee Tasting Session",
-    date: "Next Wednesday",
+    title: "Spring Harvest Brunch",
+    date: "Weekends • 10 AM",
     description:
-      "Explore different coffee blends with our barista.",
+      "Celebrating the new season with farm-to-table delicacies and our limited edition floral brew.",
   },
 ];
 
 export default function EventsPreview() {
+  const [items, setItems] = useState<any[]>(staticEvents);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/events");
+        if (response.ok) {
+          const data = await response.json();
+          if (data.length > 0) {
+            setItems(data.slice(0, 3));
+          }
+        }
+      } catch (error) {
+        console.log("Using static event data");
+      }
+    };
+    fetchEvents();
+  }, []);
   return (
-    <section className="relative bg-gradient-to-r from-dusty-olive via-ebony to-dusty-olive py-24 md:py-32 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 py-20">
+    <section className="bg-[#0a0a0a] py-32 px-6 relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#d4af37]/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/2" />
+
+      <div className="mx-auto max-w-7xl">
         {/* Heading */}
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-bold text-foreground">
-            What’s Happening
-          </h2>
-          <p className="mt-3 text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
-            Join us for special events and memorable experiences.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-black tracking-[0.3em] uppercase">
+              <Sparkles className="w-3 h-3" />
+              The Social Calendar
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black text-[#fdfaf7] tracking-tighter leading-none mb-6">
+              LATEST <br /> <span className="text-[#d4af37] italic font-serif lowercase tracking-normal">Chapters.</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <Button asChild variant="ghost" className="text-[#fdfaf7]/40 hover:text-[#d4af37] font-black uppercase tracking-widest text-xs p-0 h-auto hover:bg-transparent group">
+              <Link href="/events" className="flex items-center gap-3">
+                Chronicle Archives
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
 
         {/* Events grid */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {events.map((event) => (
-            <EventCard key={event.title} {...event} />
+        <div className="grid gap-8 md:grid-cols-3">
+          {items.map((event, index) => (
+            <motion.div
+              key={event.id || event.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.15 }}
+            >
+              <EventCard {...event} />
+            </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <Button asChild size="lg" className="bg-gradient-to-r from-coffee-bean to-camel hover:from-coffee-bean hover:to-camel text-almond-cream hover:shadow-2xl transition-all px-8 h-12 text-base mt-5 font-semibold border-0">
-            <Link href="/events">See All Events</Link>
-          </Button>
-        </motion.div>
       </div>
     </section>
   );

@@ -1,106 +1,105 @@
 import Link from "next/link";
-import { Coffee, MapPin, Phone, Clock, Facebook, Instagram, Twitter } from "lucide-react";
+import { Coffee, MapPin, Phone, Clock, Facebook, Instagram, Twitter, Sparkles, Send } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-b from-coffee-bean to-ebony text-almond-cream border-t-4 border-camel">
-      {/* Background accent */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-linear-to-tl from-camel/10 to-transparent blur-3xl" />
-      </div>
+    <footer className="relative bg-[#0a0a0a] text-[#fdfaf7] border-t border-white/5 selection:bg-[#d4af37] selection:text-black">
 
-      <div className="mx-auto max-w-7xl px-4 py-16 grid gap-12 md:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-6 py-24">
+        <div className="grid gap-16 md:grid-cols-12">
 
-        {/* Brand */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-linear-to-br from-coffee-bean to-camel">
-              <Coffee className="h-6 w-6 text-almond-cream" />
+          {/* Brand - Span 4 */}
+          <div className="md:col-span-4 space-y-8">
+            <Link href="/" className="group flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d4af37] shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-transform group-hover:scale-110">
+                <Coffee className="h-6 w-6 text-black" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-black tracking-tighter leading-none mb-1">CAFÉ AROMA</span>
+                <span className="text-[10px] font-black tracking-[0.3em] uppercase text-[#d4af37]">Since 2010</span>
+              </div>
+            </Link>
+            <p className="text-sm text-[#fdfaf7]/40 leading-relaxed max-w-xs font-medium">
+              We don't just serve coffee; we curate moments. Join us in our pursuit of the perfect roast and the perfect story.
+            </p>
+            <div className="flex gap-6">
+              <SocialIcon icon={Instagram} />
+              <SocialIcon icon={Facebook} />
+              <SocialIcon icon={Twitter} />
             </div>
-            <h3 className="text-xl font-black">Café Aroma</h3>
           </div>
-          <p className="text-sm text-almond-cream/80 leading-relaxed">
-            Cozy café serving fresh coffee, handcrafted food, and warm vibes since the day we opened our doors.
-          </p>
-          {/* Social links */}
-          <div className="flex gap-3 pt-2">
-            <a href="#" className="p-2 rounded-lg bg-almond-cream/10 hover:bg-camel transition-colors">
-              <Facebook className="h-4 w-4" />
-            </a>
-            <a href="#" className="p-2 rounded-lg bg-almond-cream/10 hover:bg-camel transition-colors">
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a href="#" className="p-2 rounded-lg bg-almond-cream/10 hover:bg-camel transition-colors">
-              <Twitter className="h-4 w-4" />
-            </a>
+
+          {/* Quick Links - Span 2 */}
+          <div className="md:col-span-2">
+            <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#d4af37] mb-8">Navigation</h4>
+            <ul className="space-y-4 text-sm font-black uppercase tracking-widest">
+              <li><Link href="/menu" className="hover:text-[#d4af37] transition-colors">Menu</Link></li>
+              <li><Link href="/events" className="hover:text-[#d4af37] transition-colors">Events</Link></li>
+              <li><Link href="/gallery" className="hover:text-[#d4af37] transition-colors">Gallery</Link></li>
+              <li><Link href="/about" className="hover:text-[#d4af37] transition-colors">About</Link></li>
+              <li><Link href="/contact" className="hover:text-[#d4af37] transition-colors">Contact</Link></li>
+            </ul>
           </div>
+
+          {/* Contact Info - Span 3 */}
+          <div className="md:col-span-3">
+            <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#d4af37] mb-8">Coordinates</h4>
+            <ul className="space-y-6 text-sm">
+              <li className="flex gap-4 items-start group">
+                <MapPin className="h-5 w-5 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-colors shrink-0" />
+                <span className="text-[#fdfaf7]/60 font-medium">123 Coffee Lane, Artisan District, Your City</span>
+              </li>
+              <li className="flex gap-4 items-center group">
+                <Phone className="h-5 w-5 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-colors shrink-0" />
+                <span className="text-[#fdfaf7]/60 font-medium">+91 98765 43210</span>
+              </li>
+              <li className="flex gap-4 items-start group">
+                <Clock className="h-5 w-5 text-[#d4af37]/40 group-hover:text-[#d4af37] transition-colors shrink-0" />
+                <span className="text-[#fdfaf7]/60 font-medium">10 AM – 11 PM<br />Closed on Mondays</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter - Span 3 */}
+          <div className="md:col-span-3">
+            <h4 className="text-[10px] font-black tracking-[0.3em] uppercase text-[#d4af37] mb-8">Journal</h4>
+            <p className="text-sm text-[#fdfaf7]/40 mb-8 font-medium">Subscribe to receive invitations to our exclusive events.</p>
+            <form className="relative group">
+              <input
+                type="email"
+                placeholder="Digital Address"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-sm text-[#fdfaf7] placeholder:text-[#fdfaf7]/20 focus:border-[#d4af37] focus:outline-none transition-all pr-12"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-[#d4af37] hover:scale-110 transition-transform"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
+          </div>
+
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h4 className="font-black mb-5 flex items-center gap-2">
-            <span className="h-1 w-1 rounded-full bg-camel"></span>
-            Quick Links
-          </h4>
-          <ul className="space-y-3 text-sm text-almond-cream/80">
-            <li><Link href="/menu" className="hover:text-camel transition-colors font-medium">Menu</Link></li>
-            <li><Link href="/events" className="hover:text-camel transition-colors font-medium">Events</Link></li>
-            <li><Link href="/gallery" className="hover:text-camel transition-colors font-medium">Gallery</Link></li>
-            <li><Link href="/about" className="hover:text-camel transition-colors font-medium">About</Link></li>
-            <li><Link href="/contact" className="hover:text-camel transition-colors font-medium">Contact</Link></li>
-          </ul>
-        </div>
-
-        {/* Contact Info */}
-        <div>
-          <h4 className="font-black mb-5 flex items-center gap-2">
-            <span className="h-1 w-1 rounded-full bg-camel"></span>
-            Contact
-          </h4>
-          <ul className="space-y-4 text-sm text-almond-cream/80">
-            <li className="flex gap-3 items-start">
-              <MapPin className="h-5 w-5 text-camel shrink-0 mt-0.5" />
-              <span>City Center, Your City</span>
-            </li>
-            <li className="flex gap-3 items-center">
-              <Phone className="h-5 w-5 text-camel shrink-0" />
-              <span>+91 98765 43210</span>
-            </li>
-            <li className="flex gap-3 items-start">
-              <Clock className="h-5 w-5 text-camel shrink-0 mt-0.5" />
-              <span>10 AM – 11 PM<br/>Closed on Mondays</span>
-            </li>
-          </ul>
-        </div>
-
-        {/* Newsletter */}
-        <div>
-          <h4 className="font-black mb-5 flex items-center gap-2">
-            <span className="h-1 w-1 rounded-full bg-camel"></span>
-            Newsletter
-          </h4>
-          <p className="text-sm text-almond-cream/80 mb-4">
-            Get updates on new menu items and special events.
+        {/* Bottom Bar */}
+        <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2 text-[10px] font-black tracking-[0.2em] uppercase text-[#fdfaf7]/20">
+            <Sparkles className="w-3 h-3 text-[#d4af37]/40" />
+            Crafted for the Discerning
+          </div>
+          <p className="text-[10px] font-black tracking-[0.2em] uppercase text-[#fdfaf7]/20">
+            © {new Date().getFullYear()} CAFÉ AROMA. ALL RIGHTS RESERVED.
           </p>
-          <form className="space-y-3">
-            <input
-              type="email"
-              placeholder="Your email"
-              className="w-full px-4 py-2 rounded-lg bg-almond-cream/10 border border-almond-cream/20 text-almond-cream placeholder:text-almond-cream/50 focus:border-camel focus:outline-none transition-colors"
-            />
-            <button
-              type="submit"
-              className="w-full px-4 py-2 rounded-lg bg-linear-to-r from-coffee-bean to-camel hover:from-coffee-bean hover:to-camel text-almond-cream font-semibold transition-all"
-            >
-              Subscribe
-            </button>
-          </form>
         </div>
-      </div>
-
-      <div className="border-t border-almond-cream/10 py-6 px-4 text-center text-sm text-almond-cream/70">
-        <p>© {new Date().getFullYear()} Café Aroma. All rights reserved. Crafted with ☕ and ❤️</p>
       </div>
     </footer>
+  );
+}
+
+function SocialIcon({ icon: Icon }: { icon: any }) {
+  return (
+    <a href="#" className="h-10 w-10 border border-white/10 rounded-xl flex items-center justify-center text-[#fdfaf7]/20 hover:text-[#d4af37] hover:border-[#d4af37] transition-all">
+      <Icon className="w-5 h-5" />
+    </a>
   );
 }

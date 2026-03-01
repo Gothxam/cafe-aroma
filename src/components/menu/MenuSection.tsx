@@ -28,9 +28,8 @@ export default function MenuSection({ title, items }: Props) {
       >
         {title}
         <ChevronDown
-          className={`transition-transform duration-300 ${
-            open ? 'rotate-180' : ''
-          }`}
+          className={`transition-transform duration-300 ${open ? 'rotate-180' : ''
+            }`}
         />
       </button>
 
