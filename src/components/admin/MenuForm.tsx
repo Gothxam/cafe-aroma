@@ -41,7 +41,7 @@ export default function MenuForm({ onSuccess }: { onSuccess?: () => void }) {
       data.append("description", formData.description);
       data.append("image", formData.image);
 
-      const response = await fetch("http://localhost:5000/api/menu", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`}/api/menu`, {
         method: "POST",
         body: data,
       });

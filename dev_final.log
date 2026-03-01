@@ -39,3 +39,4 @@
  GET / 200 in 35ms (compile: 9ms, render: 26ms)
  GET /events 200 in 25ms (compile: 7ms, render: 18ms)
  GET / 200 in 24ms (compile: 5ms, render: 19ms)
+Γ£ô Compiled in 2.2s
