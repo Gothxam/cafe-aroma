@@ -1,0 +1,7 @@
+# Exclude backend from Vercel frontend deployment
+backend/
+backend/node_modules/
+backend/dist/
+*.log
+.git/
+fq
