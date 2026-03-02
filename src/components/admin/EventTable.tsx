@@ -38,7 +38,7 @@ export default function EventTable() {
     if (!confirm("Are you sure you want to cancel this gathering?")) return;
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/events/${id}, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/events/${id}`, {
         method: "DELETE"
       });
       if (response.ok) {
