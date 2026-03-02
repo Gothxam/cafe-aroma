@@ -9,8 +9,8 @@ const sanitizedPass = rawPass.replace(/\s/g, "");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  port: 465,
+  secure: true, // MUST be true for port 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: sanitizedPass,
