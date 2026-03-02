@@ -13,7 +13,7 @@ export default function AdminGalleryPage() {
 
     const fetchGallery = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`}/api/gallery`);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}}`}/api/gallery`);
             if (response.ok) {
                 const data = await response.json();
                 setItems(data);
@@ -33,7 +33,7 @@ export default function AdminGalleryPage() {
         if (!confirm("Are you sure you want to remove this visual from the scroll?")) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/api/gallery/${id}`, {
+            const response = await fetch(${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}/api/gallery/${id}, {
                 method: "DELETE"
             });
             if (response.ok) {

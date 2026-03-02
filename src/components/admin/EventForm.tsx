@@ -41,7 +41,7 @@ export default function EventForm({ onSuccess }: { onSuccess?: () => void }) {
       data.append("description", formData.description);
       data.append("image", formData.image);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`}/api/events`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}}`}/api/events`, {
         method: "POST",
         body: data,
       });

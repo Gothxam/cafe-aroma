@@ -41,7 +41,7 @@ export default function MenuForm({ onSuccess }: { onSuccess?: () => void }) {
       data.append("description", formData.description);
       data.append("image", formData.image);
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`}/api/menu`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/menu`, {
         method: "POST",
         body: data,
       });
@@ -117,15 +117,13 @@ export default function MenuForm({ onSuccess }: { onSuccess?: () => void }) {
           </div>
           <div className="space-y-1.5">
             <label className="text-[10px] font-black text-gray-400 tracking-[0.2em] uppercase ml-4">Category</label>
-            <select
+            <Input
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full bg-[#fafaf9] border-gray-100 rounded-2xl h-14 font-medium px-6 text-sm focus:border-[#d4af37]/30 outline-none transition-all appearance-none cursor-pointer"
-            >
-              <option>Coffee</option>
-              <option>Pastry</option>
-              <option>Brew</option>
-            </select>
+              placeholder="Coffee, Pastry, etc."
+              className="bg-[#fafaf9] border-gray-100 rounded-2xl h-14 font-medium px-6 focus:border-[#d4af37]/30 focus:ring-1 focus:ring-[#d4af37]/30 transition-all"
+              required
+            />
           </div>
         </div>
 

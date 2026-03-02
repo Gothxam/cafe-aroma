@@ -26,7 +26,7 @@ interface Reservation {
 export default function ReservationTable({ reservations, onUpdate }: { reservations: Reservation[], onUpdate: () => void }) {
     const updateStatus = async (id: string, status: string) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/reservations/${id}`, {
+            const response = await fetch(${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}/api/reservations/${id}, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ status })

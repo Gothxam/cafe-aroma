@@ -36,7 +36,7 @@ export default function GalleryForm({ onSuccess }: { onSuccess?: () => void }) {
             data.append("subtitle", formData.subtitle);
             data.append("image", formData.image);
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}`}/api/gallery`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}}`}/api/gallery`, {
                 method: "POST",
                 body: data,
             });
