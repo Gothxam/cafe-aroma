@@ -32,6 +32,15 @@ app.use("/api/events", eventRoutes);
 app.use("/api/reservations", reservationRoutes);
 app.use("/api/stats", statsRoutes);
 
+// Global Error Handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error("Backend Global Error:", err);
+    res.status(err.status || 500).json({
+        message: err.message || "Internal Server Error",
+        error: process.env.NODE_ENV === "development" ? err : {}
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
