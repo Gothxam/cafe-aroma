@@ -18,7 +18,7 @@ export default function MenuTable() {
 
   const fetchItems = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}}`}/api/menu`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/menu`);
       if (response.ok) {
         const data = await response.json();
         setItems(data);
@@ -38,7 +38,7 @@ export default function MenuTable() {
     if (!confirm("Are you sure you want to remove this masterpiece from the catalog?")) return;
 
     try {
-      const response = await fetch(${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}'}'}/api/menu/${id}, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/menu/${id}, {
         method: "DELETE"
       });
       if (response.ok) {
