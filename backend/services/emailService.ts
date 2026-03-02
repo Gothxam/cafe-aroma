@@ -54,13 +54,13 @@ export const sendReservationRequestEmail = async (reservation: any) => {
   };
 
   try {
-    console.log("Attempting to send reservation request email to:", reservation.email);
+    console.log(`[EMAIL DISPATCH] Attempting to send reservation request email to: ${reservation.email}`);
     const info = await transporter.sendMail(mailOptions);
-    console.log("Reservation request email sent successfully:", info.messageId);
+    console.log(`[EMAIL SUCCESS] Reservation request email sent successfully! MessageID: ${info.messageId}`);
   } catch (error: any) {
-    console.error("CRITICAL: Failed to send reservation request email.");
-    console.error("Error Message:", error.message);
-    console.error("Error Stack:", error.stack);
+    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation request email to ${reservation.email}.`);
+    console.error(`[EMAIL ERROR] Message: ${error.message}`);
+    console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
   }
 };
 
@@ -96,12 +96,12 @@ export const sendReservationDecisionEmail = async (reservation: any) => {
   };
 
   try {
-    console.log(`Attempting to send reservation ${reservation.status} email to:`, reservation.email);
+    console.log(`[EMAIL DISPATCH] Attempting to send reservation ${reservation.status} email to: ${reservation.email}`);
     const info = await transporter.sendMail(mailOptions);
-    console.log(`Reservation ${reservation.status} email sent successfully:`, info.messageId);
+    console.log(`[EMAIL SUCCESS] Reservation ${reservation.status} email sent successfully! MessageID: ${info.messageId}`);
   } catch (error: any) {
-    console.error(`CRITICAL: Failed to send reservation ${reservation.status} email.`);
-    console.error("Error Message:", error.message);
-    console.error("Error Stack:", error.stack);
+    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation ${reservation.status} email to ${reservation.email}.`);
+    console.error(`[EMAIL ERROR] Message: ${error.message}`);
+    console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
   }
 };

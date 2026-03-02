@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
         await newReservation.save();
 
         // Send request received email (await for production reliability)
-        console.log("Processing reservation request for:", newReservation.email);
+        console.log(`[EMAIL TRIGGER] Invoking request email for: ${newReservation.email}`);
         await sendReservationRequestEmail(newReservation);
 
         res.status(201).json(newReservation);
@@ -39,7 +39,7 @@ router.put("/:id", async (req, res) => {
 
         // If status changed to confirmed or cancelled, send decision email
         if (updated && (req.body.status === "confirmed" || req.body.status === "cancelled")) {
-            console.log(`Sending decision email for ${updated.email}...`);
+            console.log(`[EMAIL TRIGGER] Invoking decision email for ${updated.email}...`);
             await sendReservationDecisionEmail(updated);
         }
 
