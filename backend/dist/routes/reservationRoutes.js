@@ -22,25 +22,30 @@ router.post("/", async (req, res) => {
     try {
         const newReservation = new Reservation_1.default(req.body);
         await newReservation.save();
-        // Send request received email asynchronously
-        (0, emailService_1.sendReservationRequestEmail)(newReservation);
+        // Send request received email (await for production reliability)
+        console.log(`[EMAIL TRIGGER] Invoking request email for: ${newReservation.email}`);
+        await (0, emailService_1.sendReservationRequestEmail)(newReservation);
         res.status(201).json(newReservation);
     }
     catch (err) {
+        console.error("Reservation Creation Error:", err.message);
         res.status(400).json({ message: err.message });
     }
 });
 // Update reservation status
 router.put("/:id", async (req, res) => {
     try {
+        console.log(`Updating reservation ${req.params.id} with status: ${req.body.status}`);
         const updated = await Reservation_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true });
         // If status changed to confirmed or cancelled, send decision email
         if (updated && (req.body.status === "confirmed" || req.body.status === "cancelled")) {
-            (0, emailService_1.sendReservationDecisionEmail)(updated);
+            console.log(`[EMAIL TRIGGER] Invoking decision email for ${updated.email}...`);
+            await (0, emailService_1.sendReservationDecisionEmail)(updated);
         }
         res.json(updated);
     }
     catch (err) {
+        console.error("Reservation Update Error:", err.message);
         res.status(400).json({ message: err.message });
     }
 });

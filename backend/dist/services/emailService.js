@@ -7,12 +7,30 @@ exports.sendReservationDecisionEmail = exports.sendReservationRequestEmail = voi
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
+// Sanitize Gmail App Password (remove spaces if present)
+const rawPass = process.env.EMAIL_PASS || "";
+const sanitizedPass = rawPass.replace(/\s/g, "");
 const transporter = nodemailer_1.default.createTransport({
-    service: "gmail", // Or your preferred service
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, // MUST be true for port 465
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: sanitizedPass,
     },
+    tls: {
+        rejectUnauthorized: false, // Helps with some cloud provider network restrictions
+    },
+});
+// Verify connection configuration on startup
+transporter.verify((error, success) => {
+    if (error) {
+        console.error("CRITICAL: Email Transporter Verification Failed!");
+        console.error("Error Message:", error.message);
+    }
+    else {
+        console.log("Email Transporter is ready to deliver messages.");
+    }
 });
 const sendReservationRequestEmail = async (reservation) => {
     const mailOptions = {
@@ -37,14 +55,14 @@ const sendReservationRequestEmail = async (reservation) => {
     `,
     };
     try {
-        console.log("Attempting to send reservation request email to:", reservation.email);
+        console.log(`[EMAIL DISPATCH] Attempting to send reservation request email to: ${reservation.email}`);
         const info = await transporter.sendMail(mailOptions);
-        console.log("Reservation request email sent successfully:", info.messageId);
+        console.log(`[EMAIL SUCCESS] Reservation request email sent successfully! MessageID: ${info.messageId}`);
     }
     catch (error) {
-        console.error("CRITICAL: Failed to send reservation request email.");
-        console.error("Error Message:", error.message);
-        console.error("Error Stack:", error.stack);
+        console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation request email to ${reservation.email}.`);
+        console.error(`[EMAIL ERROR] Message: ${error.message}`);
+        console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
     }
 };
 exports.sendReservationRequestEmail = sendReservationRequestEmail;
@@ -78,14 +96,14 @@ const sendReservationDecisionEmail = async (reservation) => {
     `,
     };
     try {
-        console.log(`Attempting to send reservation ${reservation.status} email to:`, reservation.email);
+        console.log(`[EMAIL DISPATCH] Attempting to send reservation ${reservation.status} email to: ${reservation.email}`);
         const info = await transporter.sendMail(mailOptions);
-        console.log(`Reservation ${reservation.status} email sent successfully:`, info.messageId);
+        console.log(`[EMAIL SUCCESS] Reservation ${reservation.status} email sent successfully! MessageID: ${info.messageId}`);
     }
     catch (error) {
-        console.error(`CRITICAL: Failed to send reservation ${reservation.status} email.`);
-        console.error("Error Message:", error.message);
-        console.error("Error Stack:", error.stack);
+        console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation ${reservation.status} email to ${reservation.email}.`);
+        console.error(`[EMAIL ERROR] Message: ${error.message}`);
+        console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
     }
 };
 exports.sendReservationDecisionEmail = sendReservationDecisionEmail;
