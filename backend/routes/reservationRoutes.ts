@@ -20,11 +20,13 @@ router.post("/", async (req, res) => {
         const newReservation = new Reservation(req.body);
         await newReservation.save();
 
-        // Send request received email asynchronously
-        sendReservationRequestEmail(newReservation);
+        // Send request received email (await for production reliability)
+        console.log("Processing reservation request for:", newReservation.email);
+        await sendReservationRequestEmail(newReservation);
 
         res.status(201).json(newReservation);
     } catch (err: any) {
+        console.error("Reservation Creation Error:", err.message);
         res.status(400).json({ message: err.message });
     }
 });
@@ -32,15 +34,18 @@ router.post("/", async (req, res) => {
 // Update reservation status
 router.put("/:id", async (req, res) => {
     try {
+        console.log(`Updating reservation ${req.params.id} with status: ${req.body.status}`);
         const updated = await Reservation.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
         // If status changed to confirmed or cancelled, send decision email
         if (updated && (req.body.status === "confirmed" || req.body.status === "cancelled")) {
-            sendReservationDecisionEmail(updated);
+            console.log(`Sending decision email for ${updated.email}...`);
+            await sendReservationDecisionEmail(updated);
         }
 
         res.json(updated);
     } catch (err: any) {
+        console.error("Reservation Update Error:", err.message);
         res.status(400).json({ message: err.message });
     }
 });

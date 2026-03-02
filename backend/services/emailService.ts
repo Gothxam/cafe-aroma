@@ -3,12 +3,26 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Sanitize Gmail App Password (remove spaces if present)
+const rawPass = process.env.EMAIL_PASS || "";
+const sanitizedPass = rawPass.replace(/\s/g, "");
+
 const transporter = nodemailer.createTransport({
-  service: "gmail", // Or your preferred service
+  service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    pass: sanitizedPass,
   },
+});
+
+// Verify connection configuration on startup
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("CRITICAL: Email Transporter Verification Failed!");
+    console.error("Error Message:", error.message);
+  } else {
+    console.log("Email Transporter is ready to deliver messages.");
+  }
 });
 
 export const sendReservationRequestEmail = async (reservation: any) => {
