@@ -1,38 +1,14 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-// Sanitize Gmail App Password (remove spaces if present)
-const rawPass = process.env.EMAIL_PASS || "";
-const sanitizedPass = rawPass.replace(/\s/g, "");
-
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // MUST be true for port 465
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: sanitizedPass,
-  },
-  tls: {
-    rejectUnauthorized: false, // Helps with some cloud provider network restrictions
-  },
-});
-
-// Verify connection configuration on startup
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("CRITICAL: Email Transporter Verification Failed!");
-    console.error("Error Message:", error.message);
-  } else {
-    console.log("Email Transporter is ready to deliver messages.");
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM_EMAIL = process.env.FROM_EMAIL || "onboarding@resend.dev";
 
 export const sendReservationRequestEmail = async (reservation: any) => {
   const mailOptions = {
-    from: `"Café Aroma" <${process.env.EMAIL_USER}>`,
+    from: `Café Aroma <${FROM_EMAIL}>`,
     to: reservation.email,
     subject: "Reservation Request Received - Café Aroma",
     html: `
@@ -54,13 +30,18 @@ export const sendReservationRequestEmail = async (reservation: any) => {
   };
 
   try {
-    console.log(`[EMAIL DISPATCH] Attempting to send reservation request email to: ${reservation.email}`);
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`[EMAIL SUCCESS] Reservation request email sent successfully! MessageID: ${info.messageId}`);
+    console.log(`[EMAIL DISPATCH] Attempting to send reservation request email to: ${reservation.email} via Resend`);
+    const { data, error } = await resend.emails.send(mailOptions);
+
+    if (error) {
+      throw error;
+    }
+
+    console.log(`[EMAIL SUCCESS] Reservation request email sent successfully! ID: ${data?.id}`);
   } catch (error: any) {
-    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation request email to ${reservation.email}.`);
+    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation request email to ${reservation.email} via Resend.`);
     console.error(`[EMAIL ERROR] Message: ${error.message}`);
-    console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
+    if (error.stack) console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
   }
 };
 
@@ -73,7 +54,7 @@ export const sendReservationDecisionEmail = async (reservation: any) => {
     : "We regret to inform you that we are unable to accommodate your reservation request at this time due to lack of available slots or scheduling conflicts.";
 
   const mailOptions = {
-    from: `"Café Aroma" <${process.env.EMAIL_USER}>`,
+    from: `Café Aroma <${FROM_EMAIL}>`,
     to: reservation.email,
     subject: subject,
     html: `
@@ -96,12 +77,17 @@ export const sendReservationDecisionEmail = async (reservation: any) => {
   };
 
   try {
-    console.log(`[EMAIL DISPATCH] Attempting to send reservation ${reservation.status} email to: ${reservation.email}`);
-    const info = await transporter.sendMail(mailOptions);
-    console.log(`[EMAIL SUCCESS] Reservation ${reservation.status} email sent successfully! MessageID: ${info.messageId}`);
+    console.log(`[EMAIL DISPATCH] Attempting to send reservation ${reservation.status} email to: ${reservation.email} via Resend`);
+    const { data, error } = await resend.emails.send(mailOptions);
+
+    if (error) {
+      throw error;
+    }
+
+    console.log(`[EMAIL SUCCESS] Reservation ${reservation.status} email sent successfully! ID: ${data?.id}`);
   } catch (error: any) {
-    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation ${reservation.status} email to ${reservation.email}.`);
+    console.error(`[EMAIL ERROR] CRITICAL: Failed to send reservation ${reservation.status} email to ${reservation.email} via Resend.`);
     console.error(`[EMAIL ERROR] Message: ${error.message}`);
-    console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
+    if (error.stack) console.error(`[EMAIL ERROR] Stack: ${error.stack}`);
   }
 };

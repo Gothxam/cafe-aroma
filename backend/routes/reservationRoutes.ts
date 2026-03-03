@@ -20,9 +20,11 @@ router.post("/", async (req, res) => {
         const newReservation = new Reservation(req.body);
         await newReservation.save();
 
-        // Send request received email (await for production reliability)
+        // Send request received email (non-blocking to prevent frontend timeouts)
         console.log(`[EMAIL TRIGGER] Invoking request email for: ${newReservation.email}`);
-        await sendReservationRequestEmail(newReservation);
+        sendReservationRequestEmail(newReservation).catch(err => {
+            console.error(`[EMAIL FATAL] Failed asynchronous dispatch:`, err);
+        });
 
         res.status(201).json(newReservation);
     } catch (err: any) {
@@ -40,7 +42,9 @@ router.put("/:id", async (req, res) => {
         // If status changed to confirmed or cancelled, send decision email
         if (updated && (req.body.status === "confirmed" || req.body.status === "cancelled")) {
             console.log(`[EMAIL TRIGGER] Invoking decision email for ${updated.email}...`);
-            await sendReservationDecisionEmail(updated);
+            sendReservationDecisionEmail(updated).catch(err => {
+                console.error(`[EMAIL FATAL] Failed asynchronous dispatch:`, err);
+            });
         }
 
         res.json(updated);
